@@ -5,7 +5,7 @@ We will use Rails to construct a RESTful API. The purpose of this API is to quic
 
 This is a pair project. You and your partner should use all the techniques we've learned so far to keep yourselves organized and on track, and ensure that no requirements slip through the cracks.
 
-This project is due: **Friday November 9th**
+This project is due: **Friday November 8th**
 
 ## Learning Goals
 Upon completing this project, students should be able to:
