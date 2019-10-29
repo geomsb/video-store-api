@@ -30,8 +30,7 @@ Your project will be evaluated against the following requirements:
   - Everything we've learned so far about how to design and build a Rails app still applies!
 
 ## Project Baseline
-- Read the API Requirements below and create a pseudo-code "routes" file that specifies
-  - The _endpoints_ your API will need
+- Read the API Requirements specified in the [Wave 2 & 3 requirements section](https://github.com/Ada-C12/video-store-api#wave-2-customers-and-movies) and take note of the following for each endpoint
   - The _HTTP verbs_ each endpoint will use
   - Any data that must be provided to the endpoint in order for it to do its work
 - Read the Seed Data description below and, bearing in mind the API Requirements, create an ERD for your database that specifies
