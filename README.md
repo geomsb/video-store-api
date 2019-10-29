@@ -115,7 +115,7 @@ We have also included [this video](https://adaacademy.hosted.panopto.com/Panopto
 
 **The smoke tests are not a substitute for writing your own tests!!!!!** They do **not** check that the content is _correct_, nor do they cover any negative or edge cases. Verifying correctness in these cases is **your** responsibility.
 
-The smoke tests live in the file [`test/VideoStoreAPI_smoke_tests.postman_collection.json`](test/VideoStoreAPI_smoke_tests.postman_collection.json). To run them:
+The smoke tests live in the [test folder](test). To run them:
 
 1. Open Postman
 1. Click `Import` in the top left
