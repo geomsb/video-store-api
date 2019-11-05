@@ -1,0 +1,9 @@
+rental_1:
+  customer: betsy
+  movie: old_movie
+rental_2:
+  customer: john
+  movie: new_movie
+rental_3:
+  customer: betsy
+  movie: new_movie
