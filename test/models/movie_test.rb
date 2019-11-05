@@ -12,7 +12,8 @@ describe Movie do
 
       expect(@movie.rentals.count).must_be :>, 0
       @movie.rentals.each do |rental|
-      expect(rental).must_be_instance_of Rental
+        expect(rental).must_be_instance_of Rental
+      end
     end
   end
 end
