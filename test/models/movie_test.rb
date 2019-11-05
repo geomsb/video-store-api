@@ -2,12 +2,17 @@ require "test_helper"
 
 describe Movie do
   describe "relationships" do
+    before do
+      @customer = customers(:betsy)
+      @movie = movies(:new_movie)
+    end
+
     it "has many rentals" do
+      rental = Rental.new(movie_id: @movie.id, customer_id: @customer.id)
 
-
-      # expect(new_movie.re.count).must_be :>, 0
-      # new_order.order_items.each do |order|
-      #   expect(order).must_be_instance_of OrderItem
+      expect(@movie.rentals.count).must_be :>, 0
+      @movie.rentals.each do |rental|
+      expect(rental).must_be_instance_of Rental
     end
   end
 end
