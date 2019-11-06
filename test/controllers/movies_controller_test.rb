@@ -71,12 +71,10 @@ describe MoviesController do
   describe "create" do
     before do
       @movie_data = {
-        movie: {
-          title: "Test movie",
-          overview: "bad movie",
-          release_date: "2019-11-06",
-          inventory: "4"
-        }
+        title: "Test movie",
+        overview: "bad movie",
+        release_date: "2019-11-06",
+        inventory: "4"
       }
     end
     it "responds with created status when request is valid" do
@@ -85,13 +83,13 @@ describe MoviesController do
       }.must_differ 'Movie.count', 1
 
       body = JSON.parse(response.body)
-      must_respond_with :created
+      must_respond_with :ok
       expect(body.keys).must_include "id"
-      expect(Movie.last.title).must_equal @movie_data[:movie][:title]
+      expect(Movie.last.title).must_equal @movie_data[:title]
     end
 
     it "will respond with bad_request for invalid data" do
-      @movie_data[:movie][:title] = nil
+      @movie_data[:title] = nil
     
       expect {
         post movies_path, params: @movie_data
