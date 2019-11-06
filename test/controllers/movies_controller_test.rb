@@ -66,7 +66,42 @@ describe MoviesController do
       expect(body.keys.sort).must_equal ["errors"]
       expect(body["errors"]).must_equal ["Movie #{id} not found"]
     end
+  end
 
+  describe "create" do
+    before do
+      @movie_data = {
+        movie: {
+          title: "Test movie",
+          overview: "bad movie",
+          release_date: "2019-11-06",
+          inventory: "4"
+        }
+      }
+    end
+    it "responds with created status when request is valid" do
+      expect {
+        post movies_path, params: @movie_data
+      }.must_differ 'Movie.count', 1
 
+      body = JSON.parse(response.body)
+      must_respond_with :created
+      expect(body.keys).must_include "id"
+      expect(Movie.last.title).must_equal @movie_data[:movie][:title]
+    end
+
+    it "will respond with bad_request for invalid data" do
+      @movie_data[:movie][:title] = nil
+    
+      expect {
+        post movies_path, params: @movie_data
+      }.wont_change "Movie.count"
+    
+      must_respond_with :bad_request
+    
+      expect(response.header['Content-Type']).must_include 'json'
+      body = JSON.parse(response.body)
+      expect(body["errors"].keys).must_include "title"
+    end
   end
 end

@@ -11,8 +11,21 @@ class MoviesController < ApplicationController
 
     if movie
       render json: movie, status: :ok
+      return
     else
       render json: {"errors" => ["Movie #{params[:id]} not found"]}, status: :not_found
+      return
+    end
+  end
+
+  def create
+    movie = Movie.new(movie_params)
+    if movie.save
+      render json: movie.as_json(only: [:id]), status: :created
+      return
+    else
+      render json: {errors: movie.errors.messages}, status: :bad_request
+      return
     end
   end
 
