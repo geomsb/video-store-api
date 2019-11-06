@@ -1,6 +1,7 @@
 KEYS = [:id, :title, :overview, :release_date, :inventory, :available_inventory]
 
 class MoviesController < ApplicationController
+
   def index
     movies = Movie.all
     render json: movies.as_json(only: [:id, :release_date, :title]), status: :ok
@@ -20,6 +21,7 @@ class MoviesController < ApplicationController
 
   def create
     movie = Movie.new(movie_params)
+    movie.available_inventory = movie.inventory
     if movie.save
       render json: movie.as_json(only: [:id]), status: :ok
       return
