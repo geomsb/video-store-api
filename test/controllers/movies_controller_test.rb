@@ -1,4 +1,5 @@
 require "test_helper"
+require "pry"
 
 describe MoviesController do
   describe "index" do
@@ -49,7 +50,7 @@ describe MoviesController do
       get movie_path(@movie.id)
 
       body = JSON.parse(response.body)
-
+      binding.pry
       expect(body).must_be_instance_of Hash
       expect(body.keys.sort).must_equal ["available_inventory", "id", "inventory", "overview", "release_date", "title"]
       expect(body["title"]).must_equal @movie.title
@@ -86,6 +87,7 @@ describe MoviesController do
       must_respond_with :ok
       expect(body.keys).must_include "id"
       expect(Movie.last.title).must_equal @movie_data[:title]
+      expect(Movie.last.available_inventory).must_equal @movie_data[:inventory]
     end
 
     it "will respond with bad_request for invalid data" do
