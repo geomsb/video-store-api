@@ -1,6 +1,28 @@
 require "test_helper"
 
 describe Movie do
+  before do
+    @movies = Movie.all
+  end
+
+  describe "validations" do
+    it "can be valid" do
+      @movies.each do |movie|
+        assert(movie.valid?)
+      end
+    end
+
+    it "will have the required fields" do
+      @movies.each do |movie|
+        [:title, :overview, :release_date].each do |field|
+          expect(item).must_respond_to field
+        end
+      end
+
+    end
+
+  end
+
   describe "relationships" do
     before do
       @customer = customers(:betsy)
