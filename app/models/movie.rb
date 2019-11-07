@@ -5,7 +5,8 @@ class Movie < ApplicationRecord
   validates :inventory, numericality: true, presence: true
 
   def movie_avail?
-    if movie.available_inventory > 1
+    if self.available_inventory > 1
+      self.reduce_avail_inv
       return true
     else
       return false
@@ -13,12 +14,12 @@ class Movie < ApplicationRecord
   end
 
   def reduce_avail_inv
-    movie.available_inventory = movie.available_inventory -1
-    movie.save
+    self.available_inventory = self.available_inventory - 1
+    self.save
   end
 
   def check_in
-    movie.available_inventory = movie.available_inventory + 1
-    movie.save
+    self.available_inventory = self.available_inventory + 1
+    self.save
   end
 end

@@ -1,14 +1,17 @@
-RENTAL_KEYS = [:customer_id, :movie_id]
+RENTAL_KEYS = [:customer_id, :movie_id, :check_out, :due_date]
 
 class RentalsController < ApplicationController
   def check_out
     movie_id = rental_params[:movie_id]
     movie = Movie.find_by(id: movie_id)
+
+    # FIX logic to account for no customer
+    # if movie.movie_avail? && customer
     if movie.movie_avail?
-      movie.reduce_avail_inv
       rental = Rental.new(rental_params)
       rental.check_out = Date.today
-      rental.due_date = rental.check_out + 7
+      rental.set_due_date
+    
       if rental.save
         render json: rental.as_json(only: [:id]), status: :ok
         return
@@ -17,7 +20,7 @@ class RentalsController < ApplicationController
         return
       end
     else
-      render json: {"errors" => ["no movies currently available."]}, status: :ok
+      render json: {errors: ["no movies currently available."]}, status: :ok
       return
     end
   end
