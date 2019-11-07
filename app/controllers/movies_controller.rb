@@ -1,7 +1,7 @@
 MOVIES_KEYS = [:id, :title, :overview, :release_date, :inventory, :available_inventory]
 
 class MoviesController < ApplicationController
-  after_create :set_avail_inv
+  # after_create :set_avail_inv
 
   def index
     movies = Movie.all
@@ -22,7 +22,7 @@ class MoviesController < ApplicationController
 
   def create
     movie = Movie.new(movie_params)
-    # movie.available_inventory = movie.inventory
+    movie.available_inventory = movie.inventory
     if movie.save
       render json: movie.as_json(only: [:id]), status: :ok
       return
@@ -38,8 +38,8 @@ class MoviesController < ApplicationController
     params.permit(MOVIES_KEYS)
   end
 
-  def set_avail_inv
-    self.available_inventory = self.inventory
-    self.save
-  end
+  # def set_avail_inv
+  #   self.available_inventory = self.inventory
+  #   self.save
+  # end
 end
