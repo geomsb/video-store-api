@@ -3,11 +3,18 @@ RENTAL_KEYS = [:customer_id, :movie_id, :check_out, :due_date]
 class RentalsController < ApplicationController
   def check_out
     movie_id = rental_params[:movie_id]
+    customer_id = rental_params[:customer_id]
     movie = Movie.find_by(id: movie_id)
+    customer = Customer.find_by(id: customer_id)
+    
+    if movie.nil? || customer.nil?
+      render json: {errors: ["Movie or customer can't be nil."]}, status: :bad_request
+      return
+    end
 
     # FIX logic to account for no customer
     # if movie.movie_avail? && customer
-    if movie.movie_avail?
+    if movie.movie_avail? 
       rental = Rental.new(rental_params)
       rental.check_out = Date.today
       rental.set_due_date

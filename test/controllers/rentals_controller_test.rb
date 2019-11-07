@@ -61,7 +61,7 @@ describe RentalsController do
 
       must_respond_with :bad_request
       expect(response.header['Content-Type']).must_include 'json'
-      expect(body["errors"].keys).must_include "movies"
+      expect(body["errors"]).must_equal ["Movie or customer can't be nil."]
     end
 
   end

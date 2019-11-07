@@ -4,6 +4,6 @@ class Rental < ApplicationRecord
 
 
   def set_due_date
-    self.update(due_date: self.check_out + 7)
+    self.due_date = self.check_out + 7
   end
 end
