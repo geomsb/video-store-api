@@ -1,4 +1,4 @@
-KEYS = [:customer_id, :movie_id]
+RENTAL_KEYS = [:customer_id, :movie_id]
 
 class RentalsController < ApplicationController
   def check_out
@@ -29,6 +29,6 @@ class RentalsController < ApplicationController
   private
 
   def rental_params
-    params.permit(KEYS)
+    params.permit(RENTAL_KEYS)
   end
 end

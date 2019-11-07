@@ -1,5 +1,4 @@
 require "test_helper"
-require "pry"
 
 describe MoviesController do
   describe "index" do
@@ -50,7 +49,6 @@ describe MoviesController do
       get movie_path(@movie.id)
 
       body = JSON.parse(response.body)
-      binding.pry
       expect(body).must_be_instance_of Hash
       expect(body.keys.sort).must_equal ["available_inventory", "id", "inventory", "overview", "release_date", "title"]
       expect(body["title"]).must_equal @movie.title
@@ -75,7 +73,7 @@ describe MoviesController do
         title: "Test movie",
         overview: "bad movie",
         release_date: "2019-11-06",
-        inventory: "4"
+        inventory: 4
       }
     end
     it "responds with created status when request is valid" do
