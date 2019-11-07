@@ -4,7 +4,8 @@ class RentalsController < ApplicationController
   def check_out
     movie_id = rental_params[:movie_id]
     movie = Movie.find_by(id: movie_id)
-    if movie.check_out
+    if movie.movie_avail?
+      movie.reduce_avail_inv
       rental = Rental.new(rental_params)
       rental.check_out = Date.today
       rental.due_date = rental.check_out + 7
@@ -17,6 +18,7 @@ class RentalsController < ApplicationController
       end
     else
       render json: {"errors" => ["no movies currently available."]}, status: :ok
+      return
     end
   end
 
