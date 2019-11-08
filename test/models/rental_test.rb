@@ -35,6 +35,18 @@ describe Rental do
 
       expect(rental.movie).must_equal @movie
     end
+  end
 
+  describe "custom methods" do
+    describe "set_due_date" do
+      it "sets the due date to 7 days after the check_out date" do
+        rental = Rental.new(movie: Movie.first, customer: Customer.first)
+        rental.check_out = Date.today
+
+        rental.set_due_date
+
+        expect(rental.due_date).must_equal (Date.today + 7)
+      end
+    end
   end
 end
