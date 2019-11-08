@@ -12,10 +12,8 @@ class RentalsController < ApplicationController
       return
     end
 
-    # FIX logic to account for no customer
-    # if movie.movie_avail? && customer
     if movie.movie_avail? 
-      rental = Rental.new(movie_id: params[:movie_id], customer_id: params[:customer_id])
+      rental = Rental.new(movie_id: movie_id, customer_id: customer_id)
       rental.check_out = Date.today
       rental.set_due_date
     
@@ -34,7 +32,15 @@ class RentalsController < ApplicationController
 
   def check_in 
     movie_id = params[:movie_id]
+    customer_id = params[:customer_id]
     movie = Movie.find_by(id: movie_id)
+    customer = Customer.find_by(id: customer_id)
+    
+    if movie.nil? || customer.nil?
+      render json: {errors: ["Movie or customer can't be nil."]}, status: :bad_request
+      return
+    end
+    
     movie.check_in
   end
 

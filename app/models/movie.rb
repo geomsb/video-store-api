@@ -18,7 +18,7 @@ class Movie < ApplicationRecord
     self.save
   end
 
-  def check_in
+  def increase_avail_inv
     self.available_inventory = self.available_inventory + 1
     self.save
   end

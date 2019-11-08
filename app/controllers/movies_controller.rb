@@ -1,7 +1,6 @@
 MOVIES_KEYS = [:id, :title, :overview, :release_date, :inventory, :available_inventory]
 
 class MoviesController < ApplicationController
-  # after_create :set_avail_inv
 
   def index
     movies = Movie.all
@@ -38,8 +37,4 @@ class MoviesController < ApplicationController
     params.permit(MOVIES_KEYS)
   end
 
-  # def set_avail_inv
-  #   self.available_inventory = self.inventory
-  #   self.save
-  # end
 end
