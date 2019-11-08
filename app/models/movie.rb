@@ -1,10 +1,10 @@
 class Movie < ApplicationRecord
-  after_create :set_avail_inv
+  before_save :set_avail_inv, except: [:update, :index, :show]
 
   has_many :rentals
 
   validates :title, :overview, :release_date, :inventory, presence: true
-  validates_numericality_of :inventory, greater_than: 0
+  validates_numericality_of :inventory
   
   def movie_avail?
     if self.available_inventory >= 1

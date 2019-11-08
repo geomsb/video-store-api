@@ -19,17 +19,6 @@ describe Movie do
         end
       end
     end
-
-    it "must have an inventory greater than 0" do
-      movie = Movie.new(
-        title: "A title",
-        overview: "An interesting film",
-        release_date: "2019-10-03",
-        inventory: 0
-      )
-
-      refute(movie.valid?)
-    end
   end
 
   describe "relationships" do
