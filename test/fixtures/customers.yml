@@ -1,21 +1,24 @@
 betsy:
+  name: Betsy
   address: 123 Main Street
   city: Seattle
   state: WA
   postal_code: 98122
   phone: 777-8987
-  registered_at: Date.today
+  registered_at: 2019-08-10
 john:
+  name: John
   address: 555 Tissiak Ct
   city: Fremont
   state: WY
   postal_code: 87943
   phone: 888-5735
-  registered_at: Date.prev_day
+  registered_at: 2000-10-07
 sarah:
+  name: Sarah
   address: 756 Braodway
   city: Seattle
   state: WA
   postal_code: 98743
   phone: 999-0846
-  registered_at: Date.prev_day
+  registered_at: 2018-01-01

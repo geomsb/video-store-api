@@ -14,4 +14,27 @@ describe Customer do
       end
     end
   end
+
+  describe "custom methods" do
+    describe "check_out_movie" do
+      it "increases the movies checked out count of a customer by 1" do
+        customer = Customer.first
+
+        customer.check_out_movie
+  
+        expect(customer.movies_checked_out_count).must_equal 1
+      end 
+    end
+
+    describe "check_in_movie" do
+      it "descreases movies checked out count of a customer by 1" do
+        customer = customers(:sarah)
+        customer.check_out_movie
+        
+        customer.check_in_movie
+
+        expect(customer.movies_checked_out_count).must_equal 0
+      end
+    end
+  end
 end

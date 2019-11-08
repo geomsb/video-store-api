@@ -130,6 +130,5 @@ describe RentalsController do
       expect(response.header['Content-Type']).must_include 'json'
       expect(body["errors"]).must_equal ["Movie or customer can't be nil."] 
     end
-
   end
 end
