@@ -16,6 +16,8 @@ class RentalsController < ApplicationController
       rental = Rental.new(movie_id: movie_id, customer_id: customer_id)
       rental.check_out = Date.today
       rental.set_due_date
+      movie.reduce_avail_inv
+      customer.check_out_movie
     
       if rental.save
         render json: rental.as_json(only: [:id]), status: :ok
@@ -40,8 +42,19 @@ class RentalsController < ApplicationController
       render json: {errors: ["Movie or customer can't be nil."]}, status: :bad_request
       return
     end
-    
-    movie.check_in
+
+    rental = customer.rentals.find_by(movie_id: movie_id, check_in: nil) 
+    rental.check_in = Date.today
+    movie.increase_avail_inv
+    customer.check_in_movie
+  
+    if rental.save
+      render json: rental.as_json(only: [:id]), status: :ok
+      return
+    else
+      render json: {errors: rental.errors.messages}, status: :bad_request
+      return
+    end
   end
 
   private

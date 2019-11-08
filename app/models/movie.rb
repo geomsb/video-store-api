@@ -6,7 +6,6 @@ class Movie < ApplicationRecord
 
   def movie_avail?
     if self.available_inventory >= 1
-      self.reduce_avail_inv
       return true
     else
       return false
